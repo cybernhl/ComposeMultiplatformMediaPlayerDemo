@@ -9,12 +9,12 @@ import java.awt.Dimension
 
 fun main() = application {
     val windowState = rememberWindowState(width = 900.dp, height = 700.dp)
-    CompositionLocalProvider(LocalWindowState provides windowState) {
-        Window(
-            title = "MediaPlayer",
-            state = windowState,
-            onCloseRequest = ::exitApplication,
-        ) {
+    Window(
+        title = "MediaPlayer",
+        state = windowState,
+        onCloseRequest = ::exitApplication,
+    ) {
+        CompositionLocalProvider(LocalWindowState provides windowState) {
             window.minimumSize = Dimension(600, 600)
             MainView()
         }

@@ -22,7 +22,7 @@ dependencies {
 
     implementation(compose.desktop.currentOs)
     implementation(libs.kotlinx.coroutines.swing)
-    implementation(libs.chaintech.media.player)
+    implementation("com.github.cybernhl.ComposeMultiplatformMediaPlayer:compose-multiplatform-media-player:1.0.54")
     implementation(libs.jetbrains.compose.ui.tooling.preview)
 }
 

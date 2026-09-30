@@ -32,6 +32,7 @@ kotlin {
         it.binaries.framework {
             baseName = xcfName
             isStatic = true
+            binaryOption("bundleId", "org.chaintech.app")
         }
     }
 
@@ -62,19 +63,28 @@ kotlin {
             implementation(libs.image.loader)
             implementation(libs.media.kit)
 
-            implementation(libs.chaintech.media.player)
+            // 編譯期僅供符號引用，不打包進 Runtime (Shadowing 策略)
+            compileOnly(libs.chaintech.media.player)
         }
 
         androidMain.dependencies {
             implementation(libs.jetbrains.compose.ui.tooling)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.chaintech.media.player) // Android 運行時使用遠端庫
         }
 
         iosMain.dependencies {
+            implementation(libs.chaintech.media.player) // iOS 運行時使用遠端庫
+        }
+
+        wasmJsMain.dependencies {
+            implementation(libs.chaintech.media.player) // Web 運行時使用遠端庫
         }
 
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation("com.github.cybernhl.ComposeMultiplatformMediaPlayer:compose-multiplatform-media-player:1.0.54")
+//            api(project(":compose-multiplatform-media-player"))
         }
     }
 }
